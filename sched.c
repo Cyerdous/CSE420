@@ -29,13 +29,12 @@ typedef struct LL
 
 Process* ReadLine(FILE* file)
 {
-    Process* new = malloc(sizeof(Process));
     unsigned int pid, at, bt, p;
     if(fscanf(file, "%d %d %d %d", &pid, &at, &bt, &p) != 4)
     {
-        free(new);
         return null;
     }
+    Process* new = malloc(sizeof(Process));
     new->Pid = pid;
     new->ArrivalTime = at;
     new->BurstTime = bt;
