@@ -70,7 +70,7 @@ LL* ReadFile(FILE* file, int limit)
     processes->head = null;
     processes->tail = null;
     int i;
-    for(i = 0; i < limit || i == 0; i++)
+    for(i = 0; i < limit || limit == 0; i++)
     { 
         Process* procToAdd = ReadLine(file);
         if(procToAdd == null)
@@ -92,7 +92,7 @@ void WriteProccessToFile(Process* proc, FILE* out)
 void FirstComeFirstServe(LL* list, FILE* out)
 {
     int i;
-    for(i = 0; 1; i++)
+    for(i = 0; list->head != null; i++)
     {
         if(list->head == null)
         {
@@ -140,6 +140,11 @@ void FirstComeFirstServe(LL* list, FILE* out)
                 {
                     priority->next->prev = null;
                     list->head = priority->next;
+                }
+                else
+                {
+                    list->head = null;
+                    list->tail = null;
                 }
                 free(priority->process);
                 free(priority);
