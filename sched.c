@@ -226,8 +226,10 @@ int main(int argc, char* argv[])
     
     LL* processes;
     int limit = 0;
-    if(argc == 4)
+    if(argc == 5)
+    {
         sscanf(argv[4], "%d", &limit);
+    }
         
     processes = ReadFile(in, limit);   
 
