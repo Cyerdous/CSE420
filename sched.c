@@ -159,9 +159,9 @@ void PreemptivePriority(LL* list, FILE* out)
         //decrement burst time of best priority, decrement wait time
         Node* process = list->head;
         Node* priority = list->head;
-        while(process != null && process->process != null)
+        while(process != null && process->process != null && priority->process->ArrivalTime <= i)
         {
-            if(priority->process->Priority < process->process->Priority && priority->process->ArrivalTime <= i)
+            if(priority->process->Priority > process->process->Priority && priority->process->ArrivalTime <= i)
             {
                 priority = process;
             }
