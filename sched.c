@@ -33,6 +33,7 @@ Process* ReadLine(FILE* file)
     unsigned int pid, at, bt, p;
     if(fscanf(file, "%d %d %d %d", &pid, &at, &bt, &p) != 4)
     {
+        free(new);
         return null;
     }
     new->Pid = pid;
@@ -40,7 +41,7 @@ Process* ReadLine(FILE* file)
     new->BurstTime = bt;
     new->Priority = p;
     new->FinishTime = 0;
-    new->WaitingTime = 0;
+    new->WaitingTime = 0;    
     return new;
     
 }
@@ -135,7 +136,7 @@ void FirstComeFirstServe(LL* list, FILE* out)
                     priority->next->prev = null;
                     list->head = priority->next;
                 }
-                else
+                else if(priority->next == null && priority->prev == null)
                 {
                     list->head = null;
                     list->tail = null;
