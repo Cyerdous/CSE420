@@ -227,9 +227,9 @@ int main(int argc, char* argv[])
     LL* processes;
     int limit = 0;
     if(argc == 4)
-        sscanf(argv[4], "%d", limit);
+        sscanf(argv[4], "%d", &limit);
         
-    processes = ReadFile(in, argv[4]);   
+    processes = ReadFile(in, limit);   
 
     // Run process and write to file
     if(strcmp(argv[3], "FCFS") == 0)
