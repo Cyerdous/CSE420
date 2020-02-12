@@ -225,10 +225,11 @@ int main(int argc, char* argv[])
     // Create data structure
     
     LL* processes;
+    int limit = 0;
     if(argc == 4)
-        processes = ReadFile(in, argv[4]);
-    else
-        processes = ReadFile(in, 0);    
+        sscanf(argv[4], "%d", limit);
+        
+    processes = ReadFile(in, argv[4]);   
 
     // Run process and write to file
     if(strcmp(argv[3], "FCFS") == 0)
