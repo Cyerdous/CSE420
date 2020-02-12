@@ -102,6 +102,7 @@ void FirstComeFirstServe(LL* list, FILE* out)
         Node* priority = list->head;
         while(process != null)
         {
+            if(list->head == null) break;
             if(priority->process->ArrivalTime > process->process->ArrivalTime && process->process->ArrivalTime <= i)
             {
                 priority = process;
