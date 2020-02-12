@@ -103,12 +103,6 @@ void FirstComeFirstServe(LL* list, FILE* out)
         
         while(process != null && process->process != null)
         {
-            // if(process == null || process->process == null) break;
-            // if(priority->process->ArrivalTime > process->process->ArrivalTime && process->process->ArrivalTime <= i)
-            // {
-            //     priority = process;
-            // }
-            //increment wait time of waiting processes
             if(process->process->ArrivalTime <= i)
             {
                 process->process->WaitingTime++;
@@ -148,8 +142,6 @@ void FirstComeFirstServe(LL* list, FILE* out)
                 }
                 free(priority->process);
                 free(priority);
-                priority->process = null;
-                priority = null;
             }
         }
     }
