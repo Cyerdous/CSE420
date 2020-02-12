@@ -64,12 +64,13 @@ void AddToLL(LL* list, Node* node)
     }
 }
 
-LL* ReadFile(FILE* file)
+LL* ReadFile(FILE* file, int limit)
 {
     LL* processes = (LL*)malloc(sizeof(LL));
     processes->head = null;
     processes->tail = null;
-    for(;;)
+    int i;
+    for(i = 0; i < limit || i == 0; i++)
     { 
         Process* procToAdd = ReadLine(file);
         if(procToAdd == null)
@@ -217,7 +218,12 @@ int main(int argc, char* argv[])
     FILE* out = fopen(argv[2], "w");
 
     // Create data structure
-    LL* processes = ReadFile(in);
+    
+    LL* processes;
+    if(argc == 4)
+        processes = ReadFile(in, argv[4]);
+    else
+        processes = ReadFile(in, 0);    
 
     // Run process and write to file
     if(strcmp(argv[3], "FCFS") == 0)
