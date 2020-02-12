@@ -102,57 +102,47 @@ void FirstComeFirstServe(LL* list, FILE* out)
         Node* priority = list->head;
         while(process != null)
         {
-            if(priority->process->ArrivalTime > process->process->ArrivalTime)
+            if(priority->process->ArrivalTime > process->process->ArrivalTime && process->process->ArrivalTime <= i)
             {
                 priority = process;
             }
-            process = process->next;
-        }
-        priority->process->BurstTime--;
-
-        //if bursttime becomes 0, remove it and write info to file
-        if(priority->process->BurstTime == 0)
-        {
-            priority->process->FinishTime = i+1;
-            WriteProccessToFile(priority->process, out);
-            if(priority->next != null && priority->prev != null)
-            {
-                priority->next->prev = priority->prev;
-                priority->prev->next = priority->next;
-            }
-            else if(priority->next == null && priority->prev != null)
-            {
-                priority->prev->next = null;
-                list->tail = priority->prev;
-            }
-            else if(priority->prev == null && priority->next != null)
-            {
-                priority->next->prev = null;
-                list->head = priority->next;
-            }
-            free(priority->process);
-            free(priority);
-            priority->process = null;
-            priority = null;
-        }
-        
-        //increment wait time of all processes
-        process = list->head;
-        while(process != null)
-        {
+            //increment wait time of waiting processes
             if(process->process->ArrivalTime <= i)
             {
                 process->process->WaitingTime++;
             }            
             process = process->next;
-            if(process == list->tail)
-            {
-                break;
-            }
         }
         if(priority != null)
         {
             priority->process->WaitingTime--;
+            priority->process->BurstTime--;
+
+            //if bursttime becomes 0, remove it and write info to file
+            if(priority->process->BurstTime == 0)
+            {
+                priority->process->FinishTime = i+1;
+                WriteProccessToFile(priority->process, out);
+                if(priority->next != null && priority->prev != null)
+                {
+                    priority->next->prev = priority->prev;
+                    priority->prev->next = priority->next;
+                }
+                else if(priority->next == null && priority->prev != null)
+                {
+                    priority->prev->next = null;
+                    list->tail = priority->prev;
+                }
+                else if(priority->prev == null && priority->next != null)
+                {
+                    priority->next->prev = null;
+                    list->head = priority->next;
+                }
+                free(priority->process);
+                free(priority);
+                priority->process = null;
+                priority = null;
+            }
         }
     }
 }
