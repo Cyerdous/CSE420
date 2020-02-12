@@ -100,7 +100,7 @@ void FirstComeFirstServe(LL* list, FILE* out)
         //decrement burst time of first arrival, decrement wait time
         Node* process = list->head;
         Node* priority = list->head;
-        while(process != null)
+        while(process != null && process->process != null)
         {
             if(process == null || process->process == null) break;
             if(priority->process->ArrivalTime > process->process->ArrivalTime && process->process->ArrivalTime <= i)
@@ -114,7 +114,7 @@ void FirstComeFirstServe(LL* list, FILE* out)
             }            
             process = process->next;
         }
-        if(priority != null)
+        if(priority != null && priority->process != null)
         {
             priority->process->WaitingTime--;
             priority->process->BurstTime--;
