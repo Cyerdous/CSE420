@@ -161,7 +161,7 @@ void PreemptivePriority(LL* list, FILE* out)
         Node* priority = list->head;
         while(process != null && process->process != null)
         {
-            if(priority->process->Priority < process->process->Priority && priority->process->ArrivalTime <= i)
+            if(priority->process->Priority < process->process->Priority && process->process->ArrivalTime <= i)
             {
                 priority = process;
             }
